@@ -22,7 +22,9 @@
     "core-header-panel": "Polymer/core-header-panel#^0.5",
     "core-toolbar": "Polymer/core-toolbar#^0.5",
     "paper-tabs": "Polymer/paper-tabs#^0.5",
-    "font-roboto": "Polymer/font-roboto#^0.5"
+    "font-roboto": "Polymer/font-roboto#^0.5",
+    "eonasdan-bootstrap-datetimepicker": "~4.7.14",
+    "moment": "~2.10.2"
   },
   "resolutions": {
     "polymer": "^0.5",

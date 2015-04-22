@@ -394,3 +394,24 @@ line-height: 1.428571429;
     vertical-align:middle;
     float:none;
 }
+#page-wrapper a i{
+   color: #428bca;
+}
+.top-buffer { margin-top:20px; }
+.btn-circle-small{
+    width: 25px;
+  height: 25px;
+  padding: 6px 0;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.428571429;
+}
+.btn-circle-small i{
+  vertical-align: super;
+}
+.circle-large{
+  font-size: 25px !important;
+}
