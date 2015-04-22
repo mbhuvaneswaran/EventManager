@@ -8,17 +8,30 @@
 	</a>
 
 <div class="row" ng-hide="">
-<div style="width: 25%;margin-left: auto;margin-right: auto"><h3>No Events Found</h3></div>
-	<div class="container-fluid" ng-repeat="event in events">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				{{event.name}}
+<div style="width: 25%;margin-left: auto;margin-right: auto" ng-hide="events.length"><h3>No Events Found</h3></div>
+	<div class="container-fluid">
+		<div class="card col-md-10" ng-repeat="event in events">
+			<div class="row header">
+				<div class="col-md-7">
+					<h3>{{event.name}}</h3>
+				</div>
+				<div class="col-md-5 date-container">
+					<h3>{{event.date}}</h3>
+				</div>
 			</div>
-			<div class="panel-body">
-				<p>{{event.address1}}</p>
+			<div class="row top-buffer main-content">
+				<div class="section col-md-12">
+					{{event.description}}
+				</div>
 			</div>
-			<div class="panel-footer">
-				{{event.address2}}
+			<div class="footer row">
+				<div class="col-md-6">
+					<strong>Address:</strong>
+					<address>{{event.place.address1}}
+						{{event.place.address2}}</address>    </div>
+				<div class="col-md-4 pull-right people">
+					{{event.invitees.length}} people coming
+				</div>
 			</div>
 		</div>
 	</div>

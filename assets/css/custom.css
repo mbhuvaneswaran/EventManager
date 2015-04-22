@@ -415,3 +415,27 @@ line-height: 1.428571429;
 .circle-large{
   font-size: 25px !important;
 }
+*{
+  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+.header,.main-content{
+    border-bottom:1px solid #eee;
+  margin-bottom:10px;
+}
+
+.card{
+  position:relative;
+ margin:20px;
+ box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24)
+}
+
+
+.main-content{
+  padding:10px;
+}
+.card:hover{
+  background:#f5f8fa;
+}
+.people{
+  font-size:10px;
+}

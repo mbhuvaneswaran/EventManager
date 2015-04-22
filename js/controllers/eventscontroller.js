@@ -5,7 +5,7 @@ define(['app'],function(app){
 
     return app.controller('EventsController',['$scope',function($scope){
     $scope.newEvent=false;
-        $scope.events=JSON.parse(localStorage.getItem('events'))
+        $scope.events=JSON.parse(localStorage.getItem('events'))?"":[];
     }])
 
 })
