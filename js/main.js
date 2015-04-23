@@ -10,14 +10,15 @@ require.config({
             bootstrap:"../bower_components/bootstrap/dist/js/bootstrap.min",
             jquery:"../bower_components/jquery/dist/jquery.min",
             dtp:"../bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker",
-            moment:"../bower_components/moment/min/moment.min"
+            moment:"../bower_components/moment/min/moment.min",
+            tooltip:"../bower_components/bootstrap/js/tooltip"
         },
         shim: {
 
             'angularRoute': ['angular'],
             'bootstrap':['jquery'],
             'dtp':['bootstrap','moment'],
-
+            'tooltip':['bootstrap'],
             'angular':{
                 exports:"angular"
             }

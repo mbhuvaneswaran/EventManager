@@ -10,7 +10,7 @@
 <div class="row" ng-hide="">
 <div style="width: 25%;margin-left: auto;margin-right: auto" ng-hide="events.length"><h3>No Events Found</h3></div>
 	<div class="container-fluid">
-		<div class="card col-md-10" ng-repeat="event in events">
+		<div class="card col-md-10" ng-repeat="event in events" ng-click="getEventDetails(event)">
 			<div class="row header">
 				<div class="col-md-7">
 					<h3>{{event.name}}</h3>

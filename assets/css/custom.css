@@ -439,3 +439,37 @@ line-height: 1.428571429;
 .people{
   font-size:10px;
 }
+.panel,.panel-heading{
+  border-radius: 0px !important;
+}
+.invitee img{
+  height: 50px;
+  width: 50px;
+
+}
+.invitee{
+  display: inline-block;
+  float: left;
+  padding:15px;
+  box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+  margin: 5px;
+  position: relative;
+}
+.invitee-name{
+  display: none;
+}
+.invitee:hover .invitee-name{
+  display: inherit;
+}
+.invitee-tick{
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: green;
+}
+.invitee-tick i{
+  color: green !important;
+}
+.dim{
+  opacity: 0.5;
+}

@@ -1,7 +1,7 @@
 /**
  * Created by bhuvanem on 12/17/2014.
  */
-define(['angular', 'app','js/controllers/homecontroller.js','js/controllers/eventscontroller.js','js/controllers/addeventcontroller.js'], function(angular,app,HomeController) {
+define(['angular', 'app','js/controllers/homecontroller.js','js/controllers/eventscontroller.js','js/controllers/eventcontroller.js','js/controllers/addeventcontroller.js'], function(angular,app,HomeController) {
 
     return app.config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/Home', {
@@ -9,9 +9,9 @@ define(['angular', 'app','js/controllers/homecontroller.js','js/controllers/even
             controller: 'HomeController'
         });
         
-        $routeProvider.when('/Tasks/:TaskID',{
-            templateUrl:'../templates/taskDetail.html',
-            controller:'TaskController'
+        $routeProvider.when('/Events/:EventID',{
+            templateUrl:'templates/eventdetails.html',
+            controller:'EventController'
         });
  $routeProvider.when('/Events',{
             templateUrl:'templates/events.html',

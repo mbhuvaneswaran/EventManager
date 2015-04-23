@@ -26,11 +26,12 @@ define(['app','bootstrap','dtp',],function(app,bootstrap,dtp){
 
             $scope.details.invitess?$scope.details.invitees.splice($scope.invitees.indexOf(inv),1):"";
         }
-        $scope.addEvent=function(){
+        $scope.addEvent=function(dtp){
             $scope.details.invitees.push({email:$scope.currentUser});
             $scope.details.id=$scope.getID();
-            $scope.details.date=$("#datetimepicker1").datepicker( 'getDate' );
-            var Events=JSON.parse(localStorage.getItem("events"));
+            $scope.details.date=$("#datetimepicker1 input")[0].value;
+            var locEvents=localStorage.getItem("events");
+            var Events=locEvents?JSON.parse(localStorage.getItem("events")):"";
             Events?"":Events=[];
             Events.push($scope.details);
             localStorage.setItem('events',JSON.stringify(Events));
