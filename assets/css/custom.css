@@ -473,3 +473,6 @@ line-height: 1.428571429;
 .dim{
   opacity: 0.5;
 }
+.flat{
+  border-radius: 0px !important;
+}
