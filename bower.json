@@ -24,7 +24,8 @@
     "paper-tabs": "Polymer/paper-tabs#^0.5",
     "font-roboto": "Polymer/font-roboto#^0.5",
     "eonasdan-bootstrap-datetimepicker": "~4.7.14",
-    "moment": "~2.10.2"
+    "moment": "~2.10.2",
+    "requirejs-plugins": "~1.0.3"
   },
   "resolutions": {
     "polymer": "^0.5",

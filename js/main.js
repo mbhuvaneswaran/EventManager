@@ -11,7 +11,8 @@ require.config({
             jquery:"../bower_components/jquery/dist/jquery.min",
             dtp:"../bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker",
             moment:"../bower_components/moment/min/moment.min",
-            tooltip:"../bower_components/bootstrap/js/tooltip"
+            tooltip:"../bower_components/bootstrap/js/tooltip",
+            'async':'../bower_components/requirejs-plugins/src/async'
         },
         shim: {
 

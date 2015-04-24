@@ -1,14 +1,18 @@
 /**
  * Created by bhuvanem on 12/17/2014.
  */
-define(['app','bootstrap','dtp',],function(app,bootstrap,dtp){
-
+define(['app','bootstrap','dtp',"js/utility/createeventmap.js",'async!http://maps.google.com/maps/api/js?sensor=false'],function(app,bootstrap,dtp){
+   // google.maps.event.addDomListener(window, 'load', initialize);
+   // initialize();
     return app.controller('AddEventController',['$scope','$location',function($scope,$location){
+        initialize();
         $scope.details={
             name:"",
             place:{
                 address1:"",
-                address2:""
+                address2:"",
+                latitude:"",
+                longitude:""
             },
             invitees:[],
             date:""
@@ -30,6 +34,8 @@ define(['app','bootstrap','dtp',],function(app,bootstrap,dtp){
             $scope.details.invitees.push({email:$scope.currentUser});
             $scope.details.id=$scope.getID();
             $scope.details.date=$("#datetimepicker1 input")[0].value;
+            $scope.details.place.latitude=marker.getPosition().lat();
+            $scope.details.place.longitude=marker.getPosition().lng();
             var locEvents=localStorage.getItem("events");
             var Events=locEvents?JSON.parse(localStorage.getItem("events")):"";
             Events?"":Events=[];
