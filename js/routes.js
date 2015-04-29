@@ -1,7 +1,7 @@
 /**
  * Created by bhuvanem on 12/17/2014.
  */
-define(['angular', 'app','js/controllers/homecontroller.js','js/controllers/eventscontroller.js','js/controllers/eventcontroller.js','js/controllers/addeventcontroller.js'], function(angular,app,HomeController) {
+define(['angular', 'app','js/controllers/homecontroller.js','js/controllers/logincontroller.js','js/controllers/eventscontroller.js','js/controllers/eventcontroller.js','js/controllers/addeventcontroller.js'], function(angular,app,HomeController) {
 
     return app.config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/Home', {
@@ -20,6 +20,10 @@ define(['angular', 'app','js/controllers/homecontroller.js','js/controllers/even
  $routeProvider.when('/AddEvent',{
             templateUrl:'templates/addevent.html',
             controller:'AddEventController'
+        });
+        $routeProvider.when('/Login',{
+            templateUrl:'templates/login.html',
+            controller:'LoginController'
         });
         $routeProvider.otherwise({redirectTo: '/Home'});
     }]);

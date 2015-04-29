@@ -1,7 +1,7 @@
 /**
  * Created by bhuvanem on 12/17/2014.
  */
-define(['app','bootstrap','dtp',"js/utility/createeventmap.js",'async!http://maps.google.com/maps/api/js?sensor=false'],function(app,bootstrap,dtp){
+define(['app','bootstrap','jquery','dtp',"js/utility/createeventmap.js",'async!http://maps.google.com/maps/api/js?sensor=false'],function(app,bootstrap,dtp){
    // google.maps.event.addDomListener(window, 'load', initialize);
    // initialize();
     return app.controller('AddEventController',['$scope','$location',function($scope,$location){
@@ -41,7 +41,29 @@ define(['app','bootstrap','dtp',"js/utility/createeventmap.js",'async!http://map
             Events?"":Events=[];
             Events.push($scope.details);
             localStorage.setItem('events',JSON.stringify(Events));
-            $location.path("/Events");
+            var reqData={
+                "description": $scope.details.description,
+                "start": {
+                    "dateTime": "2015-04-28T15:00:00+05:30"
+                },
+                "summary": $scope.details.name,
+                "end": {
+                    "dateTime": "2015-04-28T15:30:00+05:30"
+                }
+            }
+            jQuery.ajax({
+                type: "POST",
+                url: "https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token="+EventApp.user.token+"&alt=json",
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(reqData),
+                success: function(){
+                    $location.path("/Events");
+                    $scope.$apply();
+                }
+
+            });
+
         }
         $scope.getID=function generateUUID(){
             var d = new Date().getTime();

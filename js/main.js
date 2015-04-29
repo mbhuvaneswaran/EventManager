@@ -12,7 +12,8 @@ require.config({
             dtp:"../bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker",
             moment:"../bower_components/moment/min/moment.min",
             tooltip:"../bower_components/bootstrap/js/tooltip",
-            'async':'../bower_components/requirejs-plugins/src/async'
+            'async':'../bower_components/requirejs-plugins/src/async',
+            'login':'utility/login'
         },
         shim: {
 
@@ -30,15 +31,34 @@ require.config({
     });
 window.name = "NG_DEFER_BOOTSTRAP!";
 require([
-    'angular','angularRoute','app','routes'
+    'angular','angularRoute','app','routes','login'
     ],
     function(angular,angularRoute,app,routes){
+        var eventApp;
+       localStorage.getItem('EventApp')?(eventApp=JSON.parse(localStorage.getItem('EventApp'))):"";
 
-        var $html = angular.element(document.getElementsByTagName('html')[0]);
+        function afterLogin(details,token){
 
-        angular.element().ready(function() {
-            angular.resumeBootstrap([app['name']]);
-        });
+                debugger;
+                details.token=token;
+                window.EventApp={user:details};
+                localStorage.setItem("EventApp",JSON.stringify(EventApp))
+            $("#userImage")[0].src=details.picture;
+                var $html = angular.element(document.getElementsByTagName('html')[0]);
+
+                angular.element().ready(function() {
+                    angular.resumeBootstrap([app['name']]);
+                });
+
+        }
+        if(eventApp && eventApp.user){
+            validateToken(eventApp.user.token,afterLogin)
+        }
+        else{
+            login(afterLogin);
+        }
+
+
     }
 
 

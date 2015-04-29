@@ -3,9 +3,10 @@
  */
 define(['app'],function(app){
 
-    return app.controller('HomeController',['$scope',function($scope){
+    return app.controller('HomeController',['$scope','$rootScope',function($scope,$rootScope){
         $scope.test="hai";
-        $scope.user="bhuvanesh";
+        debugger;
+        $scope.user=EventApp.user.name;
 
     }]);
 });
