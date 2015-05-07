@@ -2,6 +2,7 @@ package com.eventapp.application;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -22,8 +23,8 @@ public class Event {
 		public void setDescription(String description) {
 			this.description = description;
 		}
-		private List<Invitees> invitees;
-		 public void setInvitees(List<Invitees> invitees) {
+		private CopyOnWriteArrayList<Invitees> invitees=new CopyOnWriteArrayList<Invitees>();
+		 public void setInvitees(CopyOnWriteArrayList<Invitees> invitees) {
 			this.invitees = invitees;
 		}
 		private Place place;

@@ -33,7 +33,7 @@ public interface IEventManagerService {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, MediaType.APPLICATION_XML })
 	@Path("/GetEventDetails/{id}")
-	public Event GetEventDetails(@Description("Event ID") @PathParam("id") final String id,@QueryParam(value = "access_token") String access_token) throws ServiceExceptionDetails;
+	public EventDetails GetEventDetails(@Description("Event ID") @PathParam("id") final String id,@QueryParam(value = "access_token") String access_token) throws ServiceExceptionDetails;
 	
 	@GET
 	@Description(value = "Resource", target = DocTarget.RESOURCE)
@@ -48,6 +48,6 @@ public interface IEventManagerService {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, MediaType.APPLICATION_XML })
 	@Path("/EditEvent")
-	public Event EditEvent(@Description("Give Event Details")Event event,@QueryParam(value = "access_token") String access_token) throws ServiceExceptionDetails;
+	public Event EditEvent(@Description("Give Event Details")EventDetails event,@QueryParam(value = "access_token") String access_token) throws ServiceExceptionDetails;
 	
 }

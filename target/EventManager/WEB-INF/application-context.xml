@@ -14,7 +14,7 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.eventapp.services.implementation" />
 
-	<jaxrs:server id="restfulId" address="/api/">
+	<jaxrs:server id="restfulId" address="/">
 		<jaxrs:serviceBeans>
 			<!--ref bean="customerService" / -->
 			<bean id="eventService" class="com.eventapp.services.implementation.EventManagerService"></bean>

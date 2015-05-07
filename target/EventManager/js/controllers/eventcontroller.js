@@ -15,10 +15,11 @@ define(['app', 'tooltip', 'jquery', "js/utility/eventdetailsmap.js","js/service/
         EventService.getEventDetails($scope.EventId)
             .done(function(response){
                 $scope.details = response;
-                $scope.details.transport=jQuery.grep($scope.details.invitees,function(i){
-                    return i.email==EventApp.user.email
-                })[0];
-                $scope.details.invitees.splice($scope.details.invitees.indexOf($scope.details.transport),1);
+
+
+
+
+               // $scope.details.invitees.splice($scope.details.invitees.indexOf($scope.details.transport),1);
                 initializeMap($scope.details.place.latitude, $scope.details.place.longitude, $scope.details.name);
                 $scope.$apply();
                // $scope.events = events ? events : [];
@@ -42,7 +43,7 @@ define(['app', 'tooltip', 'jquery', "js/utility/eventdetailsmap.js","js/service/
                 return;
             }
             else {
-                if ($scope.accomNum < $scope.details.transport.transport.canAccomodate) {
+                if ($scope.accomNum < $scope.details.transport.canAccomodate) {
                     invt.transport.linkTo = $scope.user;
                     $scope.accomNum++;
                 }
@@ -58,9 +59,18 @@ define(['app', 'tooltip', 'jquery', "js/utility/eventdetailsmap.js","js/service/
         }
         $scope.gotoEvent = function () {
             debugger;
+            $scope.details.rsvp=true;
+            EventService.editEvent($scope.details)
+                .done(function(response){
+                        debugger;
+                })
+                .fail(function(response){
+
+                })
         }
         $scope.iAmOut = function () {
             debugger;
+            $scope.details.rsvp=false;
         }
     }])
 

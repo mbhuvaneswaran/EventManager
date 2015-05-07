@@ -2,8 +2,12 @@ package com.eventapp.mongo.implementation;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.eventapp.application.EventDetails;
+import com.google.api.services.oauth2.model.Userinfoplus;
 import org.bson.types.ObjectId;
 
 import com.eventapp.application.Event;
@@ -25,7 +29,7 @@ public class MongoEventManager implements IMongoEventManager {
 	static MongoClient client = null;
 
 	@Override
-	public Event GetEventDetails(String eventID) {
+	public EventDetails GetEventDetails(String eventID,String userEmail) {
 		// TODO Auto-generated method stub
 		try {
 			if(client==null)
@@ -34,11 +38,26 @@ public class MongoEventManager implements IMongoEventManager {
 			DBCollection collection=db.getCollection("Events");
 			BasicDBObject obj=new BasicDBObject("_id",(eventID));
 			Cursor cur=collection.find(obj);
+			System.out.println(cur);
 			Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+			EventDetails eventDetails=null;
 			if(cur.hasNext())
-				return gson.fromJson(gson.toJson(cur.next()), Event.class);
-				
-				
+				eventDetails=gson.fromJson(gson.toJson(cur.next()), EventDetails.class);
+				if(userEmail.equalsIgnoreCase(eventDetails.getOrganizer())){
+					eventDetails.setIsOrganizer(true);
+				}
+			Iterator<Invitees> ivtItr=eventDetails.getInvitees().iterator();
+			while(ivtItr.hasNext()){
+				Invitees ivt=ivtItr.next();
+				if(userEmail.equalsIgnoreCase(ivt.getEmail())){
+					eventDetails.setIsOrganizer(ivt.isOrganizer());
+					eventDetails.setTransport(ivt.getTransport());
+					eventDetails.setRsvp(ivt.isRsvp());
+					eventDetails.getInvitees().remove(ivt);
+					break;
+				}
+			}
+			return eventDetails;
 			
 			
 		} catch (UnknownHostException e) {
@@ -107,21 +126,61 @@ public class MongoEventManager implements IMongoEventManager {
 	}
 
 	@Override
-	public Event EditEvent(Event event) {
+	public EventDetails EditEvent(EventDetails event,String userEmail) {
 		// TODO Auto-generated method stub
+		Invitees orgUserIvt=null;
 		try{
 			if(client==null)
 			client = new MongoClient();
+			Event orgEvent=getEvent(event.get_id());
+
+			//if organizer can change anything
+			if(event.getOrganizer().equalsIgnoreCase(userEmail)){
+
+
+			}
+			Iterator<Invitees> itr=orgEvent.getInvitees().iterator();
+			while(itr.hasNext()){
+				Invitees ivt=itr.next();
+		//		System.out.println(ivt.getEmail());
+				if(userEmail.equalsIgnoreCase(ivt.getEmail())){
+
+					ivt.setRsvp(event.isRsvp());
+					Transport trp=ivt.getTransport();
+					trp.setCanAccomodate(event.getTransport().getCanAccomodate());
+					trp.setMode(event.getTransport().getMode());
+					orgUserIvt=ivt;
+					break;
+				}
+			}
+			orgEvent.setInvitees((CopyOnWriteArrayList)event.getInvitees());
+			orgEvent.getInvitees().add(orgUserIvt);
+			if(orgUserIvt!=null) {
+				Iterator<Invitees> eventInvtItr = event.getInvitees().iterator();
+				while (eventInvtItr.hasNext()) {
+					Invitees eventIvt = eventInvtItr.next();
+					if(eventIvt.getTransport()!=null) {
+						if (userEmail.equals(eventIvt.getTransport().getLinkTo())) {
+							Transport trans = orgUserIvt.getTransport();
+							if (trans != null)
+								trans.getGuests().add(eventIvt.getEmail());
+						}
+					}
+				}
+			}
+			else{
+				System.out.println("Null ORg");
+			}
+			//Commit the Obj
+
 			DB db=client.getDB("EventManager");
 			DBCollection eventCollection=db.getCollection("Events");
 			Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-			DBObject dbObject = (DBObject)JSON.parse(gson.toJson(event));
-			BasicDBObject searchQuery = new BasicDBObject().append("_id",event.get_id());
-			dbObject.removeField("_id");
-			dbObject.removeField("organizer");
-			dbObject.removeField("name");
+			DBObject dbObject = (DBObject)JSON.parse(gson.toJson(orgEvent));
+			System.out.println(dbObject.toString());
+			BasicDBObject searchQuery = new BasicDBObject().append("_id", event.get_id());
 			eventCollection.update(searchQuery, dbObject);
-			return event;
+			return GetEventDetails(orgEvent.get_id(),userEmail);
 		}
 		catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -162,5 +221,15 @@ public class MongoEventManager implements IMongoEventManager {
 		}
 		return null;
 	}
-
+	public static Event getEvent(String id){
+		DB db=client.getDB("EventManager");
+		DBCollection collection=db.getCollection("Events");
+		BasicDBObject obj=new BasicDBObject("_id",(id));
+		Cursor cur=collection.find(obj);
+		Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+		if(cur.hasNext()) {
+			return gson.fromJson(gson.toJson(cur.next()), Event.class);
+		}
+		return null;
+	}
 }

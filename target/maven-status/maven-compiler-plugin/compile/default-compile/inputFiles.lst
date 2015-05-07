@@ -11,6 +11,7 @@
 /usr/share/bhuvanesh/projects/EventManager/src/main/java/com/eventapp/services/implementation/EventManagerService.java
 /usr/share/bhuvanesh/projects/EventManager/src/main/java/com/eventapp/services/interfaces/IEventManagerService.java
 /usr/share/bhuvanesh/projects/EventManager/src/main/java/com/eventapp/google/interfaces/IGoogleService.java
+/usr/share/bhuvanesh/projects/EventManager/src/main/java/com/eventapp/application/UserTransport.java
 /usr/share/bhuvanesh/projects/EventManager/src/main/java/com/eventapp/exception/ServiceExceptionDetails.java
 /usr/share/bhuvanesh/projects/EventManager/src/main/java/com/eventapp/application/EventDetails.java
 /usr/share/bhuvanesh/projects/EventManager/src/main/java/com/eventapp/application/UserEvent.java

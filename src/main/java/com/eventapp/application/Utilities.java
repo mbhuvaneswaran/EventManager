@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.bson.BSONObject;
 
@@ -23,7 +24,7 @@ public static Event GetEventObjectFromDBObject(DBObject obj){
 	String latitude=((BSONObject)obj.get("place")).get("latitude").toString();
 	String longitude=((BSONObject)obj.get("place")).get("longitude").toString();
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:MM:ss");
-	List<Invitees> invitees = new ArrayList<Invitees>();
+	CopyOnWriteArrayList<Invitees> invitees = new CopyOnWriteArrayList<>();
    BasicDBList inviteesList = (BasicDBList) obj.get("invitees");
    for (int i = 0; i < inviteesList.size(); i++) {
        BasicDBObject inviteeObj = (BasicDBObject) inviteesList.get(i);

@@ -33,11 +33,11 @@ public class EventManagerService implements IEventManagerService{
 	}
 
 	@Override
-	public Event GetEventDetails(String id,String accessToken) throws ServiceExceptionDetails {
+	public EventDetails GetEventDetails(String id,String accessToken) throws ServiceExceptionDetails {
 		// TODO Auto-generated method stub
 		Userinfoplus usrInfo=googleService.GetUserInfo(accessToken);
 		if(usrInfo!=null)
-	return	evtManager.GetEventDetails(id);
+	return	evtManager.GetEventDetails(id,usrInfo.getEmail());
 		else
 			 return null;
 	
@@ -54,11 +54,12 @@ public class EventManagerService implements IEventManagerService{
 	}
 
 	@Override
-	public Event EditEvent(Event event,String accessToken) throws ServiceExceptionDetails {
+	public Event EditEvent(EventDetails event,String accessToken) throws ServiceExceptionDetails {
 		// TODO Auto-generated method stub
+
 		Userinfoplus usrInfo=googleService.GetUserInfo(accessToken);
 		if(usrInfo!=null)
-		return	evtManager.EditEvent(event);
+		return	evtManager.EditEvent(event,usrInfo.getEmail());
 		else
 			return null;
 	}

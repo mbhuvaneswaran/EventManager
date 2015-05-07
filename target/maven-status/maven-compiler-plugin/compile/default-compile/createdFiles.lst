@@ -10,6 +10,7 @@ com/eventapp/application/Place.class
 com/test/CustomerServiceImpl.class
 com/eventapp/services/implementation/EventManagerService.class
 com/eventapp/google/interfaces/IGoogleService.class
+com/eventapp/application/UserTransport.class
 com/eventapp/mongo/implementation/MongoEventManager.class
 com/test/ICustomerService.class
 com/eventapp/application/Invitees.class

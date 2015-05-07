@@ -1,14 +1,19 @@
 package com.eventapp.application;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
 public class Transport {
 	private String mode;
-	private int canAccomodate;
-	private String[] guests;
+	private int canAccomodate=0;
+	private Set<String> guests= Collections.emptySet();
 	private String linkTo;
-	public String[] getGuests() {
+	public Set<String> getGuests() {
 		return guests;
 	}
-	public void setGuests(String[] guests) {
+	public void setGuests(Set<String> guests) {
 		this.guests = guests;
 	}
 	public String getLinkTo() {

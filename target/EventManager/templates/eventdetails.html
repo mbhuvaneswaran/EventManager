@@ -25,23 +25,23 @@
                     <label>How are you coming?</label>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="own" ng-model="details.transport.transport.mode">By Own
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="own" ng-model="details.transport.mode">By Own
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="need" ng-model="details.transport.transport.mode">Need someone to Pick
+                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="need" ng-model="details.transport.mode">Need someone to Pick
                         </label>
                     </div>
 
                 </div>
                 </div>
-                <div class="col-md-6" ng-show="details.transport.transport.mode=='own'">
+                <div class="col-md-6" ng-show="details.transport.mode=='own'">
                     <div class="form-group">
                         <label>I can accomodate</label>
                         <div class="row">
                             <div class="col-md-6">
-                        <input type="text" ng-model="details.transport.transport.canAccomodate"/>
+                        <input type="text" ng-model="details.transport.canAccomodate"/>
                                 </div>
                             <div class="col-md-6">
                                 Members
@@ -52,7 +52,7 @@
         </div>
 
             <div class="row">
-                <div class="invitee" ng-repeat="invitee in details.invitees" ng-click="linkToUser(invitee)" ng-show="details.transport.transport.mode=='own'" ng-class="{dim:!invitee.transport.linkTo}">
+                <div class="invitee" ng-repeat="invitee in details.invitees" ng-click="linkToUser(invitee)" ng-show="details.transport.mode=='own'" ng-class="{dim:!invitee.transport.linkTo}">
                     <a class="" data-toggle="tooltip" data-placement="top" title="{{invitee.email}}">
                         <div class="invitee-tick" ng-show="invitee.transport.linkTo">
                             <i class="fa fa-check"></i>

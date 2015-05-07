@@ -33,6 +33,15 @@ define(['app','jquery'], function (app) {
 
                     })
                 }
+                this.editEvent=function(event){
+                     return jQuery.ajax({
+                                            type: "POST",
+                                            url: endpoint + "/EditEvent?access_token="+EventApp.user.token+"",
+                                            contentType: 'application/json',
+                                            dataType: 'json',
+                                            data: angular.toJson(event)
+                                        })
+                }
             }]);
 }
 )
